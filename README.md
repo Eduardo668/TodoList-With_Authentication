@@ -1,10 +1,12 @@
 # Todo List With Authentication
-### This project is a todo list site with an Authentication where you can create an account, login a add task in your todo list.
+### This project is a todo list site with an Authentication where you can create an account, login and add task in your todo list.
 ## Run
 ### If you wan't to run this projects follows the steps bellow.
 *  1) Git clone the projects
+
 * 2) Enter in the front-end folder in your terminal and run npm install or yarn install, After all packages are installed run the command npm run dev our yarn run dev.
-* 3) For run the backend enter in the backend folder in your terminal and if you have maven run the command mvn spring-boot:run, but if don't have maven run the command ./mvnw spring-boot:run;
+
+* 3) For run the backend enter in the backend folder in your terminal and if you have maven run the command mvn spring-boot:run, but if don't have maven run the command ./mvnw spring-boot:run .
 
 ## Tech used in this project
 
