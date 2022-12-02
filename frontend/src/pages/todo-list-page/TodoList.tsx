@@ -19,6 +19,8 @@ import { CreateTask } from "../../api/createTask";
 import { useNavigate } from "react-router-dom";
 import { DeleteTask } from "../../api/deleteTask";
 import { EditTask } from "../../api/editTask";
+import { SyncLoader } from "react-spinners";
+import aos from "aos"
 
 export const TodoListPage = () => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
@@ -62,8 +64,15 @@ export const TodoListPage = () => {
   }
 
   const queryClient = useQueryClient();
-  const { data: user_data } = useQuery("user", () => FindUser());
-  const {mutate:createTask}= useMutation(()=>CreateTask(task), {
+  const { data: user_data, isLoading:userLoading } = useQuery("user", () => FindUser(), {
+    onSuccess: ()=>{
+      aos.init({
+        duration: 1400
+      })
+    }
+  });
+  
+  const {mutate:createTask, isLoading:isCreating}= useMutation(()=>CreateTask(task), {
     onSuccess: ()=> {
        queryClient.invalidateQueries("user");
     }
@@ -104,7 +113,17 @@ export const TodoListPage = () => {
           <InputDiv>
             <input onChange={ (e)=>handleTask(e.target.value) } placeholder="Add a new task" type="text" />
             <button onClick={ ()=>createTask() } >
-              Create <img src={Plus} alt="" />
+              {
+                isCreating ? 
+                <>
+                <SyncLoader size={"12px"} color="white" /> 
+                </>  : (
+                  <>
+                  Create <img src={Plus} alt="" />
+                  </>
+                  )
+              }
+              
             </button>
           </InputDiv>
         </Header>
@@ -115,9 +134,11 @@ export const TodoListPage = () => {
           </div>
           <TodoListBox>
             <div className="tasks-list">
-              {user_data?.tasks?.length != 0 ?  (
+              {
+              user_data?.tasks?.length != 0 && !userLoading  ?  (
                 user_data?.tasks?.map((task) => (
                   <Task
+                    
                     key={task.id}
                     task={task}
                     openEditModal={openEditModal}
@@ -126,8 +147,16 @@ export const TodoListPage = () => {
                 ))
               ) : (
                 <div className="div-not-tasks">
-                  <img src={Clipboard} alt="" />
-                  <h3 className="text-not">You haven't created any tasks</h3>
+                  {
+                    userLoading ? (<SyncLoader color="#4EA8DE" />) : (
+                      <>
+                      <img src={Clipboard} alt="" />
+                      <h3 className="text-not">You haven't created any tasks yet.</h3>
+                      </>
+                      
+                    )
+                  }
+                 
                 </div>
               )}
             </div>

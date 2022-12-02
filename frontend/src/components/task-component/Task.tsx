@@ -2,6 +2,8 @@ import { BoxTask, Container } from "./style"
 import { BsTrashFill } from "react-icons/bs"
 import {MdEdit} from "react-icons/md"
 import { TaskModel } from "../../types/TaskModel"
+import { useEffect } from "react"
+import aos from "aos";
 type Props = {
     openDeleteModal:(task_id:number)=>void,
     openEditModal:(task_id:number, title_now:string)=>void,
