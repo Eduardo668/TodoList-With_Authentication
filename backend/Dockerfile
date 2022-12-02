@@ -1,5 +1,6 @@
 FROM openjdk:17-jdk-alpine
 COPY . backend
+CMD [ "/bin/sh" ]
 RUN apk -i update
 RUN cd backend
 RUN apk -i add maven
