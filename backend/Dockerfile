@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-alpine
 COPY . backend
-ENTRYPOINT [ "cd", "/backend" ]
+WORKDIR /backend
 CMD [ "/bin/sh" ]
 RUN apk update
 RUN apk add maven
