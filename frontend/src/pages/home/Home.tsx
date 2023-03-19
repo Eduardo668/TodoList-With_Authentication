@@ -28,12 +28,10 @@ export const Home = () => {
 
   const handleUsername = (username: string) => {
     setUsername(username);
-    console.log(username);
   };
 
   const handlePassword = (password: string) => {
     setPassword(password);
-    console.log(password);
   };
 
   return (
