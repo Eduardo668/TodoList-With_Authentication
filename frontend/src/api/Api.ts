@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const Api = axios.create({
-    baseURL: "http://ec2-18-228-193-248.sa-east-1.compute.amazonaws.com:443",
+    baseURL: "https://ec2-18-230-23-0.sa-east-1.compute.amazonaws.com",
     
 })
