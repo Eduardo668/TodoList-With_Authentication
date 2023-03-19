@@ -32,6 +32,7 @@ export const Home = () => {
 
   const handlePassword = (password: string) => {
     setPassword(password);
+
   };
 
   return (
